@@ -6,9 +6,29 @@
             <div class="d-flex justify-content-center text-center py-3">
 
                 <form class="p-5 bg-light" method="post">
+
+                    <?php
+
+                        /*=============================================
+                        FORMA EN QUE SE INSTA­NCIA LA CLASE DE UN MÉTODO ESTÁTICO
+                        =============================================*/
+
+                        $registro = ControladorRegistro::ctrRegistro();
+
+                        if ($registro === 'ok') {
+                            // Aquí sí entra cuando el método devuelve "ok"
+                            echo '<script>
+                                if (window.history.replaceState) {
+                                    window.history.replaceState(null, null, window.location.href);
+                                }
+                            </script>';
+                            echo '<div class="alert alert-success">El usuario ha sido registrado</div>';
+                        }
+
+                    ?>
             
                     <div class="form-group">
-                        <label for="nombre">Nombre:</label>
+                        <label for="name">Nombre:</label>
             
                         <div class="input-group">
                             
@@ -18,14 +38,14 @@
                                 </span>
                             </div>
             
-                            <input type="text" class="form-control" id="nombre" name="registroNombre">
+                            <input type="text" class="form-control" id="name" name="registroNombre">
             
                         </div>
                         
                     </div>
 
                     <div class="form-group">
-                        <label for="nombre">Teléfono:</label>
+                        <label for="telefono">Teléfono:</label>
             
                         <div class="input-group">
                             
@@ -60,7 +80,7 @@
                     </div>
             
                     <div class="form-group">
-                        <label for="pwd">Contraseña:</label>
+                        <label for="pws">Contraseña:</label>
             
                         <div class="input-group">
                             
@@ -70,7 +90,7 @@
                                 </span>
                             </div>
             
-                            <input type="password" class="form-control" id="pwd" name="registroPassword">
+                            <input type="password" class="form-control" id="pws" name="registroPassword">
             
                         </div>
             
