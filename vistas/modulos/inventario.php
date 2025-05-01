@@ -1,4 +1,3 @@
-
 <div class="container-fluid">
 		
 		<div class="container py-5">
@@ -8,7 +7,7 @@
                 <form class="p-5 bg-light" method="post">
             
                     <div class="form-group">
-                        <label for="nombre">Nombre:</label>
+                        <label for="producto">Nombre del producto:</label>
             
                         <div class="input-group">
                             
@@ -18,14 +17,14 @@
                                 </span>
                             </div>
             
-                            <input type="text" class="form-control" id="nombre" name="registroNombre">
+                            <input type="text" class="form-control" id="producto" name="registroNombre">
             
                         </div>
                         
                     </div>
 
                     <div class="form-group">
-                        <label for="nombre">Teléfono:</label>
+                        <label for="cantidad">Cantidad:</label>
             
                         <div class="input-group">
                             
@@ -35,7 +34,7 @@
                                 </span>
                             </div>
             
-                            <input type="text" class="form-control" id="telefono" name="registroTelefono">
+                            <input type="text" class="form-control" id="cantidad" name="registroCantidad">
             
                         </div>
                         
@@ -43,7 +42,7 @@
             
                     <div class="form-group">
             
-                        <label for="email">Correo electrónico:</label>
+                        <label for="precio">Precio</label>
             
                         <div class="input-group">
                             
@@ -53,31 +52,15 @@
                                 </span>
                             </div>
             
-                            <input type="email" class="form-control" id="email" name="registroEmail">
+                            <input type="text" class="form-control" id="precio" name="registroPrecio">
                         
                         </div>
                         
                     </div>
             
-                    <div class="form-group">
-                        <label for="pwd">Contraseña:</label>
-            
-                        <div class="input-group">
-                            
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fas fa-lock"></i>
-                                </span>
-                            </div>
-            
-                            <input type="password" class="form-control" id="pwd" name="registroPassword">
-            
-                        </div>
-            
-                    </div>
-            
+           
                 
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
             
                 </form>
             

@@ -5,50 +5,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vistas/librerias/bootstrap.min.css" rel="stylesheet">
     <title>PHP</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="vistas/css/styles.css">
+    <script src="https://kit.fontawesome.com/e632f1f723.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-    <? include "modulos/menu.php"; ?>
+
+ <?php include "modulos/menu.php"; ?>
 
     <div class="container-fluid">
-		<div class="container py-5">
+                
+            <div class="container py-5">
 
-			<?php 
+                <?php 
 
-				#ISSET: isset() Determina si una variable está definida y no es NULL
+                    #ISSET: isset() Determina si una variable está definida y no es NULL
 
-				if(isset($_GET["modulo"])){
+                    if(isset($_GET["modulo"])){
 
-					if($_GET["modulo"] == "registro" ||
-					   $_GET["modulo"] == "ingreso" ||
-					   $_GET["modulo"] == "inicio" ||
-                       $_GET["modulo"] == "inventario" ||
-					   $_GET["modulo"] == "salir"){
+                        if( $_GET["modulo"] == "registro" ||
+                            $_GET["modulo"] == "ingreso" ||
+                            $_GET["modulo"] == "contenido" ||
+                            $_GET["modulo"] == "inventario" ||
+                            $_GET["modulo"] == "salir"){
 
-						include "modulos/".$_GET["modulo"].".php";
+                            include "modulos/".$_GET["modulo"].".php";
 
-					}else{
+                        }else{
 
-						include "paginas/error404.php";
-					}
+                            include "modulos/error404.php";
+                        }
 
 
-				}else{
+                    }else{
 
-					include "modulos/registro.php";
+                        include "modulos/ingreso.php";
 
-				}
+                    }
 
-				
+                    ?>
 
-			 ?>
+            </div>
 
-		</div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
