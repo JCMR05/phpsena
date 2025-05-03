@@ -6,13 +6,15 @@
                     <a href="index.php?modulo=registro" class="nav-link">Registro</a>
                 </li>
                 <li class="nav-item">
+                    <a href="index.php?modulo=perfiles" class="nav-link">Perfiles</a>
+                <li class="nav-item">
                     <a href="index.php?modulo=ingreso" class="nav-link">Ingreso</a>
                 </li>
                 <li class="nav-item">
                     <a href="index.php?modulo=contenido" class="nav-link active">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a href="index.php?modulo=inventario" class="nav-link">Inventario</a>
+                    <a href="index.php?modulo=producto" class="nav-link">Inventario</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Salir</a>

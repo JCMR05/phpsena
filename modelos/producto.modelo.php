@@ -2,24 +2,23 @@
 
 require_once "conexion.php";
 
-class ModeloRegistro {
+class ModeloProducto {
 
     /*=============================================
     Registrar usuario
     =============================================*/
-    static public function mdlRegistro($tabla, $datos){
+    static public function mdlProducto($tabla, $datos){
         $sql = "INSERT INTO {$tabla} 
-                    (pers_nombre, pers_telefono, pers_correo, pers_clave) 
+                    (prod_nombre, prod_cantidad, prod_precio) 
                 VALUES 
-                    (:nombre, :telefono, :correo, :clave)";
+                    (:nombre, :cantidad, :precio)";
 
         $stmt = Conexion::conectar()->prepare($sql);
 
         #                1 adonde parada el dato.   2 dato obtenido del registro por medio del array.  3 Tipo de dato.
         $stmt->bindParam(":nombre",   $datos["nombre"],   PDO::PARAM_STR);
-        $stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
-        $stmt->bindParam(":correo",   $datos["correo"],   PDO::PARAM_STR);
-        $stmt->bindParam(":clave",    $datos["clave"],    PDO::PARAM_STR);
+        $stmt->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_STR);
+        $stmt->bindParam(":precio",   $datos["precio"],   PDO::PARAM_STR);
 
         $ok = $stmt->execute();
         $stmt->closeCursor(); #Cierra la consulta
