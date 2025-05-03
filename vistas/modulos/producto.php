@@ -5,26 +5,6 @@
             <div class="d-flex justify-content-center text-center py-3">
 
                 <form class="p-5 bg-light" method="post">
-
-                    <?php
-
-                        /*=============================================
-                        FORMA EN QUE SE INSTA­NCIA LA CLASE DE UN MÉTODO ESTÁTICO
-                        =============================================*/
-
-                        $producto = ControladorProducto::ctrProducto();
-
-                        if ($producto === 'ok') {
-                            // Aquí sí entra cuando el método devuelve "ok"
-                            echo '<script>
-                                if (window.history.replaceState) {
-                                    window.history.replaceState(null, null, window.location.href);
-                                }
-                            </script>';
-                            echo '<div class="alert alert-success">El producto ha sido registrado</div>';
-                        }
-
-                    ?>
             
                     <div class="form-group">
                         <label for="producto">Nombre del producto:</label>
@@ -81,6 +61,26 @@
            
                 
                     <button type="submit" class="btn btn-primary">Guardar</button>
+
+                    <?php
+
+                        /*=============================================
+                        FORMA EN QUE SE INSTA­NCIA LA CLASE DE UN MÉTODO ESTÁTICO
+                        =============================================*/
+
+                        $perfil = ControladorPerfil::ctrPerfil();
+
+                        if ($perfil === 'ok') {
+                            // Aquí sí entra cuando el método devuelve "ok"
+                            echo '<script>
+                                if (window.history.replaceState) {
+                                    window.history.replaceState(null, null, window.location.href);
+                                }
+                            </script>';
+                            echo '<div class="alert alert-success">El perfil ha sido registrado</div>';
+                        }
+
+                    ?>
             
                 </form>
             
