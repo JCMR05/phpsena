@@ -58,17 +58,13 @@
                         
                     </div>
             
-           
-                
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-
                     <?php
 
                         /*=============================================
                         FORMA EN QUE SE INSTA­NCIA LA CLASE DE UN MÉTODO ESTÁTICO
                         =============================================*/
 
-                        $perfil = ControladorPerfil::ctrPerfil();
+                        $perfil = ControladorProducto::ctrProducto();
 
                         if ($perfil === 'ok') {
                             // Aquí sí entra cuando el método devuelve "ok"
@@ -77,10 +73,14 @@
                                     window.history.replaceState(null, null, window.location.href);
                                 }
                             </script>';
-                            echo '<div class="alert alert-success">El perfil ha sido registrado</div>';
+                            echo '<div class="alert alert-success">El producto ha sido registrado</div>';
                         }
 
                     ?>
+                
+                    <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+
+                    
             
                 </form>
             

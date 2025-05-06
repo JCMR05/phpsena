@@ -75,9 +75,6 @@
                         </div>
             
                     </div>
-            
-                
-                    <button type="submit" class="btn btn-primary">Enviar</button>
 
                     <?php
 
@@ -85,7 +82,7 @@
                         FORMA EN QUE SE INSTA­NCIA LA CLASE DE UN MÉTODO ESTÁTICO
                         =============================================*/
 
-                        $perfil = ControladorPerfil::ctrPerfil();
+                        $perfil = ControladorRegistro::ctrRegistro();
 
                         if ($perfil === 'ok') {
                             // Aquí sí entra cuando el método devuelve "ok"
@@ -98,7 +95,10 @@
                         }
 
                     ?>
-            
+                
+                    <button type="submit" class="btn btn-primary mt-2">Enviar</button>
+
+                    
                 </form>
             
             </div>

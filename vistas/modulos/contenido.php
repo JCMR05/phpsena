@@ -1,3 +1,11 @@
+if (!isset($_SESSION["validarIngreso"]) || $_SESSION["validarIngreso"] !== "ok") {
+    header("Location: index.php?pagina=ingreso");
+    exit;
+}
+
+// Obtenemos todos los registros de la tabla "registros"
+$registros = ControladorRegistro::ctrSeleccionarRegistro();
+?>
 <section class="container-fluid">
         <div class="container py-5">
             <table class="table table-striped">
