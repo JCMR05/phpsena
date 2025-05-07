@@ -30,6 +30,20 @@ class ControladorRegistro{
     }
 
 
+        /*=============================================
+    Seleccionar Registros
+    =============================================*/
+
+    static public function ctrSeleccionarRegistro(){
+
+        $tabla = "personas";
+
+        $respuesta = ModeloRegistro::mdlSeleccionarRegistro($tabla, null,null);
+
+        return $respuesta;
+    }
+
+
     /*
     <!-- ========== Metodo ingresar ========== -->    
     */
@@ -38,7 +52,8 @@ class ControladorRegistro{
 
             if(isset($_POST["ingresoCorreo"])){
     
-                $tabla = "personas";                
+                $tabla = "personas";
+
                 $item = "pers_correo";
                 
                 $valor = $_POST["ingresoCorreo"];
@@ -51,6 +66,7 @@ class ControladorRegistro{
     
                 if($respuesta["pers_correo"] == $_POST["ingresoCorreo"] && $respuesta["pers_clave"] == $_POST["ingresoClave"]){ 
     
+                    session_start();
                     $_SESSION["validarIngreso"] = "ok";
     
                     echo '<script>

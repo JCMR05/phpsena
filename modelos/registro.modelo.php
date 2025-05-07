@@ -41,14 +41,12 @@ class ModeloRegistro {
                 pers_clave, 
                 DATE_FORMAT(pers_fecha_registro, '%d/%m/%Y') AS fecha 
                 FROM {$tabla} 
-                WHERE {$item} = :valor 
                 ORDER BY pk_id_persona DESC
             ";
 
                 $stmt = Conexion::conectar()->prepare($sql);
-                $stmt->bindValue(":valor", $valor, PDO::PARAM_STR);
                 $stmt->execute();
-                $datos = $stmt->fetch(PDO::FETCH_ASSOC);
+                $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 $stmt->closeCursor();
 
                 return $datos;
@@ -58,12 +56,12 @@ class ModeloRegistro {
             // Trae un solo registro filtrado
             $sql = "
                 SELECT 
-                    pk_id_persona AS id,
-                    pers_nombre,
-                    pers_telefono,
-                    pers_correo,
-                    pers_clave,
-                    DATE_FORMAT(pers_fecha_registro, '%d/%m/%Y') AS fecha 
+                pk_id_persona AS id,
+                pers_nombre,
+                pers_telefono,
+                pers_correo,
+                pers_clave,
+                DATE_FORMAT(pers_fecha_registro, '%d/%m/%Y') AS fecha 
                 FROM {$tabla} 
                 WHERE {$item} = :valor 
                 ORDER BY pk_id_persona DESC

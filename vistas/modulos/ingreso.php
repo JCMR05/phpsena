@@ -16,7 +16,7 @@
                                 </span>
                             </div>
             
-                            <input type="email" class="form-control" id="nombre" name="ingresoCorreo">
+                            <input type="text" class="form-control" id="nombre" name="ingresoCorreo">
             
                         </div>
                         

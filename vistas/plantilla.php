@@ -14,7 +14,7 @@
 <body>
 
 
- <?php include "modulos/menu.php"; ?>
+<?php include "modulos/menu.php"; ?>
 
     <div class="container-fluid">
                 
@@ -47,7 +47,7 @@
 
                     }
 
-                    ?>
+?>
 
             </div>
 
