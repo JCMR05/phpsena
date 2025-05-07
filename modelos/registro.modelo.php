@@ -25,9 +25,9 @@ class ModeloRegistro {
         return $ok ? "ok" : "error";
     }
 
-/*
-
-*/
+/*=====================================
+Seleccionar Registros
+======================================*/
 
     static public function mdlSeleccionarRegistro($tabla, $item, $valor){
 
