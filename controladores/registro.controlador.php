@@ -30,7 +30,7 @@ class ControladorRegistro{
     }
 
 
-        /*=============================================
+    /*=============================================
     Seleccionar Registros
     =============================================*/
 
@@ -97,4 +97,36 @@ class ControladorRegistro{
     
 
     }
+
+        /*=============================================
+        Actualizar Usuario
+        =============================================*/
+
+        public static function ctrActualizar() {
+
+        if (isset($_POST['actualizarNombre'], 
+        $_POST['actualizarTelefono'], 
+        $_POST['actualizarCorreo'], 
+        $_POST['actualizarClave'])) {
+
+            $tabla = "personas";
+
+            $datos = array(
+                "pk_id_actualizar" => $_GET["id"], 
+                "actu_nombre" => $_POST["actualizarNombre"],
+                "actu_telefono" => $_POST["actualizarTelefono"],
+                "actu_correo" => $_POST["actualizarCorreo"],
+                "actu_clave" => password_hash($_POST["actualizarClave"], PASSWORD_DEFAULT)
+            );
+
+            #Password_hash sirve para cifrar la clave
+
+            $respuesta = ModeloRegistro::mdlActualizarRegistro($tabla, $datos);
+
+            return $respuesta;
+        }
+
+        return null;
+    }
+
 }

@@ -78,4 +78,31 @@ Seleccionar Registros
 
         }
 
+/*=============================================
+Actualizar Registros
+=============================================*/
+
+    public static function mdlActualizarRegistro($tabla, $datos) {
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET pers_nombre = :nombre, 
+        pers_telefono = :telefono, 
+        pers_correo = :correo, 
+        pers_clave = :clave 
+        WHERE pk_id_persona = :id");
+
+        $stmt->bindParam(":nombre", $datos["actu_nombre"], PDO::PARAM_STR);
+        $stmt->bindParam(":telefono", $datos["actu_telefono"], PDO::PARAM_STR);
+        $stmt->bindParam(":correo", $datos["actu_correo"], PDO::PARAM_STR);
+        $stmt->bindParam(":clave", $datos["actu_clave"], PDO::PARAM_STR);
+        $stmt->bindParam(":id", $datos["pk_id_actualizar"], PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            $stmt = null;
+            return "ok";
+        } else {
+            $stmt = null;
+            return "error";
+        }
+
     }
+
+}
