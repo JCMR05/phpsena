@@ -1,1 +1,9 @@
-<h1>Saliendo de la aplicación</h1>
+<?php
+    session_start();
+
+    $_SESSION = [];
+
+    session_destroy();
+
+    header("Location: index.php?modulo=ingreso");
+    exit;

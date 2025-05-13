@@ -13,6 +13,18 @@
     // var_dump($registros);
 ?>
 
+<?php
+    $idSeleccionado = $_GET['id']; // o $_POST['id']
+    $telefono = "";
+
+    foreach ($registros as $registro) {
+        if ($registro["id"] == $idSeleccionado) {
+            $telefono = $registro["pers_telefono"];
+            break;
+        }
+    }
+?>
+
 <div class="container-fluid">
 		
 	<div class="container py-5">
@@ -53,13 +65,13 @@
 
                             <span class="input-group-text">
 
-                                <i class="fas fa-user"></i>
+                                <i class="fas fa-phone"></i>
 
                             </span>
 
                         </div>
             
-                        <input type="text" class="form-control" id="telefono" name="actualizarTelefono">
+                        <input type="text" class="form-control" id="telefono" name="actualizarTelefono" value="<?php echo $registros htmlspecialchars($telefono) ?>">
             
                     </div>
                         
@@ -81,7 +93,7 @@
 
                         </div>
             
-                        <input type="email" class="form-control" id="correo" name="actualizarCorreo">
+                        <input type="email" class="form-control" id="correo" name="actualizarCorreo" value="<?php echo $registros[0]["pers_correo"]?>">
                         
                     </div>
                         
@@ -103,7 +115,7 @@
 
                         </div>
             
-                        <input type="password" class="form-control" id="clave" name="actualizarClave">
+                        <input type="password" class="form-control" id="clave" name="actualizarClave" value="<?php echo $registros[0]["pers_clave"]?>">
             
                     </div>
             
@@ -136,7 +148,7 @@
 
 
 
-                <button type="submit" class="btn btn-primary">Actualizar</button>
+                <button type="submit" class="btn btn-primary mt-2">Actualizar</button>
             
             </form>
             

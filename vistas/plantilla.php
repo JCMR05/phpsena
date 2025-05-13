@@ -8,7 +8,7 @@
     <link href="vistas/librerias/bootstrap.min.css" rel="stylesheet">
     <title>PHP</title>
     <link rel="stylesheet" href="vistas/css/styles.css">
-    <script src="https://kit.fontawesome.com/e632f1f723.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
