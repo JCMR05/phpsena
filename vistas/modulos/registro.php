@@ -8,7 +8,7 @@
                 <form class="p-5 bg-light" method="post">
             
                     <div class="form-group">
-                        <label for="name">Nombre:</label>
+                        <label for="nombre">Nombre:</label>
             
                         <div class="input-group">
                             
@@ -18,20 +18,20 @@
                                 </span>
                             </div>
             
-                            <input type="text" class="form-control" id="name" name="registroNombre">
+                            <input type="text" class="form-control" id="nombre" name="registroNombre">
             
                         </div>
                         
                     </div>
 
                     <div class="form-group">
-                        <label for="telefono">Teléfono:</label>
+                        <label for="nombre">Teléfono:</label>
             
                         <div class="input-group">
                             
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
-                                    <i class="fas fa-phone"></i>
+                                    <i class="fa-solid fa-phone"></i>
                                 </span>
                             </div>
             
@@ -60,7 +60,7 @@
                     </div>
             
                     <div class="form-group">
-                        <label for="pws">Contraseña:</label>
+                        <label for="pwd">Contraseña:</label>
             
                         <div class="input-group">
                             
@@ -70,35 +70,36 @@
                                 </span>
                             </div>
             
-                            <input type="password" class="form-control" id="pws" name="registroPassword">
+                            <input type="password" class="form-control" id="pwd" name="registroClave">
             
                         </div>
             
                     </div>
+            
 
                     <?php
 
-                        /*=============================================
-                        FORMA EN QUE SE INSTA­NCIA LA CLASE DE UN MÉTODO ESTÁTICO
-                        =============================================*/
+                            /*=============================================
+                            FORMA EN QUE SE INSTA­NCIA LA CLASE DE UN MÉTODO ESTÁTICO
+                            =============================================*/
 
-                        $perfil = ControladorRegistro::ctrRegistro();
+                            $registro = ControladorRegistro::ctrRegistro();
 
-                        if ($perfil === 'ok') {
-                            // Aquí sí entra cuando el método devuelve "ok"
-                            echo '<script>
-                                if (window.history.replaceState) {
-                                    window.history.replaceState(null, null, window.location.href);
-                                }
-                            </script>';
-                            echo '<div class="alert alert-success">El perfil ha sido registrado</div>';
-                        }
+                            if ($registro === 'ok') {
+                                // Aquí sí entra cuando el método devuelve "ok"
+                                echo '<script>
+                                    if (window.history.replaceState) {
+                                        window.history.replaceState(null, null, window.location.href);
+                                    }
+                                </script>';
+                                echo '<div class="alert alert-success">El usuario ha sido registrado</div>';
+                            }
 
                     ?>
-                
-                    <button type="submit" class="btn btn-primary mt-2">Enviar</button>
 
-                    
+                
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+            
                 </form>
             
             </div>

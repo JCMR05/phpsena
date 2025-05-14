@@ -14,14 +14,11 @@
 require_once "controladores/plantilla.controlador.php";
 require_once "controladores/registro.controlador.php";
 require_once "controladores/producto.controlador.php";
-require_once "controladores/perfil.controlador.php";
 
-require_once "modelos/producto.modelo.php";
+
 require_once "modelos/registro.modelo.php";
+require_once "modelos/producto.modelo.php";
 require_once "modelos/conexion.php";
-require_once "modelos/perfil.modelo.php";
 
 $plantilla = new ControladorPlantilla();
 $plantilla -> ctrPlantilla();
-#Existe otra forma para ejecutarla con 4 puntos pero se usa para guardarse en una variable
-# $variable = plantilla :: ctrPlantilla();

@@ -4,9 +4,9 @@ include "modelos/registro.modelo.php";
 
 class ControladorRegistro{
 
-    /*
-    <!-- ========== Metodo agregar registro ========== -->    
-    */
+   /*=============================================
+    Agregar Registros
+    =============================================*/  
     
     static public function ctrRegistro(){
 
@@ -18,7 +18,7 @@ class ControladorRegistro{
                 "nombre" => $_POST["registroNombre"],
                 "telefono" => $_POST["registroTelefono"],
                 "correo" => $_POST["registroEmail"],
-                "clave" => $_POST["registroPassword"]            
+                "clave" => password_hash($_POST["registroClave"], PASSWORD_DEFAULT)         
             );
 
             $respuesta = ModeloRegistro::mdlRegistro($tabla, $datos);
@@ -30,103 +30,95 @@ class ControladorRegistro{
     }
 
 
-    /*=============================================
+   /*=============================================
     Seleccionar Registros
     =============================================*/
 
-    static public function ctrSeleccionarRegistro(){
-
+    static public function ctrSeleccionarRegistro($item = null, $valor = null){
         $tabla = "personas";
-
-        $respuesta = ModeloRegistro::mdlSeleccionarRegistro($tabla, null,null);
-
+        // Le pasamos el $item y $valor al modelo para que haga el WHERE cuando venga
+        $respuesta = ModeloRegistro::mdlSeleccionarRegistro($tabla, $item, $valor);
         return $respuesta;
     }
 
+    /*=============================================
+    Ingresar Usuario
+    =============================================*/
 
-    /*
-    <!-- ========== Metodo ingresar ========== -->    
-    */
+    public function ctrIngreso() {
+        if (isset($_POST["ingresoCorreo"], $_POST["ingresoClave"])) {
 
-    static public function ctrIngresar(){
+            $tabla  = "personas";
+            $item   = "pers_correo";
+            $valor  = trim($_POST["ingresoCorreo"]);
 
-            if(isset($_POST["ingresoCorreo"])){
-    
-                $tabla = "personas";
+            $respuesta = ModeloRegistro::mdlSeleccionarRegistro($tabla, $item, $valor);
 
-                $item = "pers_correo";
-                
-                $valor = $_POST["ingresoCorreo"];
-    
-                $respuesta = ModeloRegistro::mdlSeleccionarRegistro($tabla, $item, $valor);
-
-
-
-
-    
-                if($respuesta["pers_correo"] == $_POST["ingresoCorreo"] && $respuesta["pers_clave"] == $_POST["ingresoClave"]){ 
-    
-                    session_start();
-                    $_SESSION["validarIngreso"] = "ok";
-    
-                    echo '<script>
-    
-                    if ( window.history.replaceState ) {
-                        window.history.replaceState( null, null, window.location.href );
-                    }
-    
-                        window.location = "index.php?modulo=contenido";
-    
-                    </script>';
-    
-                } else {
-    
-                    echo '<script>
-    
-                    if ( window.history.replaceState ) {
-                        window.history.replaceState( null, null, window.location.href );
-                    }
-    
-                    </script>';
-    
-                    echo '<div class="alert alert-success">la contraseña no es valida</div>';
-                }
-    
-    
+            if (!$respuesta) {
+                echo '<div class="alert alert-danger">Correo o contraseña incorrectos</div>';
+                return;
             }
-    
 
+            if (password_verify(trim($_POST["ingresoClave"]), $respuesta["pers_clave"])) {
+                // ¡Asegúrate de tener session_start() antes de esto!
+                $_SESSION["validarIngreso"] = "ok";
+                echo '<script>
+                    if (window.history.replaceState) {
+                        window.history.replaceState(null, null, window.location.href);
+                    }
+                    window.location = "index.php?modulo=contenido";
+                </script>';
+            } else {
+                echo '<div class="alert alert-danger">Correo o contraseña incorrectos</div>';
+            }
+        }
     }
 
-        /*=============================================
-        Actualizar Usuario
-        =============================================*/
 
-        public static function ctrActualizar() {
+    /*=============================================
+    Actualizar Usuario
+    =============================================*/
 
-        if (isset($_POST['actualizarNombre'], 
-        $_POST['actualizarTelefono'], 
-        $_POST['actualizarCorreo'], 
-        $_POST['actualizarClave'])) {
-
+    public static function ctrActualizar() {
+        if (isset($_POST['actualizarNombre'], $_POST['actualizarTelefono'], $_POST['actualizarCorreo'])) {
+            
+            // Primero obtenemos el registro actual para saber el hash viejo
             $tabla = "personas";
+            $item  = "pk_id_persona";
+            $valor = $_GET["id"];
+            $actual = ModeloRegistro::mdlSeleccionarRegistro($tabla, $item, $valor);
+            
+            // Si el campo clave viene vacío, mantenemos el hash existente
+            if (!empty(trim($_POST['actualizarClave']))) {
+                $nuevoHash = password_hash($_POST['actualizarClave'], PASSWORD_DEFAULT);
+            } else {
+                $nuevoHash = $actual["pers_clave"];
+            }
 
-            $datos = array(
-                "pk_id_actualizar" => $_GET["id"], 
-                "actu_nombre" => $_POST["actualizarNombre"],
-                "actu_telefono" => $_POST["actualizarTelefono"],
-                "actu_correo" => $_POST["actualizarCorreo"],
-                "actu_clave" => password_hash($_POST["actualizarClave"], PASSWORD_DEFAULT)
-            );
+            // Preparamos datos
+            $datos = [
+                "id"     => $valor,
+                "nombre" => $_POST["actualizarNombre"],
+                "telefono" => $_POST["actualizarTelefono"],
+                "correo" => $_POST["actualizarCorreo"],
+                "clave"  => $nuevoHash
+            ];
 
-            #Password_hash sirve para cifrar la clave
-
-            $respuesta = ModeloRegistro::mdlActualizarRegistro($tabla, $datos);
-
-            return $respuesta;
+            return ModeloRegistro::mdlActualizarRegistro($tabla, $datos);
         }
 
         return null;
     }
+
+
+    /*=============================================
+    Eliminar Usuario
+    =============================================*/
+    public static function ctrEliminarRegistro($id) {
+        $tabla = "personas";
+        $respuesta = ModeloRegistro::mdlEliminarRegistro($tabla, $id);
+        return $respuesta;
+    }
+
 
 }

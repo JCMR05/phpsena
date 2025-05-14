@@ -25,24 +25,24 @@ class ModeloRegistro {
         return $ok ? "ok" : "error";
     }
 
-/*=====================================
-Seleccionar Registros
-======================================*/
 
     static public function mdlSeleccionarRegistro($tabla, $item, $valor){
 
+
         if ($item === null && $valor === null) {
-            $sql = "
+
+                // Trae todos los registros, aliasando la PK a 'id'
+                $sql = "
                 SELECT 
-                pk_id_persona AS id, 
-                pers_nombre, 
-                pers_telefono, 
-                pers_correo,  
-                pers_clave, 
-                DATE_FORMAT(pers_fecha_registro, '%d/%m/%Y') AS fecha 
+                    pk_id_persona AS id,
+                    pers_nombre,
+                    pers_telefono,
+                    pers_correo,
+                    pers_clave,
+                    DATE_FORMAT(pers_fecha_registro, '%d/%m/%Y') AS fecha 
                 FROM {$tabla} 
                 ORDER BY pk_id_persona DESC
-            ";
+                ";
 
                 $stmt = Conexion::conectar()->prepare($sql);
                 $stmt->execute();
@@ -51,16 +51,16 @@ Seleccionar Registros
 
                 return $datos;
 
-        } else {
 
-            // Trae un solo registro filtrado
+        }else{
+
             $sql = "
                 SELECT 
-                pk_id_persona AS id,
-                pers_nombre,
-                pers_telefono,
-                pers_correo,
-                pers_clave,
+                pk_id_persona AS id, 
+                pers_nombre, 
+                pers_telefono, 
+                pers_correo,  
+                pers_clave, 
                 DATE_FORMAT(pers_fecha_registro, '%d/%m/%Y') AS fecha 
                 FROM {$tabla} 
                 WHERE {$item} = :valor 
@@ -75,25 +75,16 @@ Seleccionar Registros
 
             return $dato;
         }
+    }
 
-        }
+  public static function mdlActualizarRegistro($tabla, $datos) {
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET pers_nombre = :nombre, pers_telefono = :telefono, pers_correo = :correo, pers_clave = :clave WHERE pk_id_persona = :id");
 
-/*=============================================
-Actualizar Registros
-=============================================*/
-
-    public static function mdlActualizarRegistro($tabla, $datos) {
-        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET pers_nombre = :nombre, 
-        pers_telefono = :telefono, 
-        pers_correo = :correo, 
-        pers_clave = :clave 
-        WHERE pk_id_persona = :id");
-
-        $stmt->bindParam(":nombre", $datos["actu_nombre"], PDO::PARAM_STR);
-        $stmt->bindParam(":telefono", $datos["actu_telefono"], PDO::PARAM_STR);
-        $stmt->bindParam(":correo", $datos["actu_correo"], PDO::PARAM_STR);
-        $stmt->bindParam(":clave", $datos["actu_clave"], PDO::PARAM_STR);
-        $stmt->bindParam(":id", $datos["pk_id_actualizar"], PDO::PARAM_INT);
+        $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+        $stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
+        $stmt->bindParam(":correo", $datos["correo"], PDO::PARAM_STR);
+        $stmt->bindParam(":clave", $datos["clave"], PDO::PARAM_STR);
+        $stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
 
         if ($stmt->execute()) {
             $stmt = null;
@@ -103,6 +94,29 @@ Actualizar Registros
             return "error";
         }
 
+        
     }
+
+
+    /**
+     * Elimina un registro de la base de datos
+     * @param string $tabla
+     * @param int $id
+     * @return string "ok" si se eliminó, "error" en caso contrario
+     */
+        public static function mdlEliminarRegistro($tabla, $id) {
+            $stmt = Conexion::conectar()->prepare(
+                "DELETE FROM {$tabla} WHERE pk_id_persona = :id"
+            );
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+
+            if ($stmt->execute()) {
+                return "ok";
+            } else {
+                return "error";
+            }
+        }
+
+
 
 }

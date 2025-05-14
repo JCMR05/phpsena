@@ -8,11 +8,12 @@
     <link href="vistas/librerias/bootstrap.min.css" rel="stylesheet">
     <title>PHP</title>
     <link rel="stylesheet" href="vistas/css/styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js" crossorigin="anonymous"></script>
+        <!-- Latest compiled Fontawesome-->
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-
 
 <?php include "modulos/menu.php"; ?>
 
@@ -20,9 +21,25 @@
                 
             <div class="container py-5">
 
-                <?php 
+  
 
-                    #ISSET: isset() Determina si una variable está definida y no es NULL
+                <?php
+
+                    session_start();
+
+                    $modulo = isset($_GET['modulo']) ? $_GET['modulo'] : 'ingreso';
+
+                    if (!isset($_SESSION["validarIngreso"]) || $_SESSION["validarIngreso"] !== "ok") {
+                        
+                        if ($modulo === 'ingreso' || $modulo === 'registro') {
+                            include "modulos/{$modulo}.php";
+                            exit;
+                        }
+
+                        header("Location: index.php?modulo=ingreso");
+                        exit;
+                    }
+
 
                     if(isset($_GET["modulo"])){
 
@@ -30,7 +47,6 @@
                             $_GET["modulo"] == "ingreso" ||
                             $_GET["modulo"] == "contenido" ||
                             $_GET["modulo"] == "producto" ||
-                            $_GET["modulo"] == "perfiles" ||
                             $_GET["modulo"] == "editar" ||
                             $_GET["modulo"] == "salir"){
 
@@ -41,14 +57,13 @@
                             include "modulos/error404.php";
                         }
 
-
                     }else{
 
                         include "modulos/ingreso.php";
 
                     }
 
-?>
+                    ?>
 
             </div>
 
