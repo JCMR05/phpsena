@@ -64,9 +64,9 @@
                         FORMA EN QUE SE INSTA­NCIA LA CLASE DE UN MÉTODO ESTÁTICO
                         =============================================*/
 
-                        $perfil = ControladorProducto::ctrProducto();
+                        $producto = ControladorProducto::ctrProducto();
 
-                        if ($perfil === 'ok') {
+                        if ($producto === 'ok') {
                             // Aquí sí entra cuando el método devuelve "ok"
                             echo '<script>
                                 if (window.history.replaceState) {
@@ -76,11 +76,9 @@
                             echo '<div class="alert alert-success">El producto ha sido registrado</div>';
                         }
 
-                    ?>
+                        ?>
                 
                     <button type="submit" class="btn btn-primary mt-2">Guardar</button>
-
-                    
             
                 </form>
             

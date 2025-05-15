@@ -5,5 +5,5 @@
 
     session_destroy();
 
-    header("Location: index.php?modulo=ingreso");
+    header("Location: ingreso");
     exit;

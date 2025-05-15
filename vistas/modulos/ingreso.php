@@ -39,11 +39,9 @@
             
                     </div>
 
-                    <?php
-
-                        $ingresar = new ControladorRegistro();
-                        $ingresar->ctrIngresar();
-
+                    <?php                     
+                      $ingresar = new ControladorRegistro();
+                      $ingresar->ctrIngreso(); 
                     ?>
             
                     <button type="submit" class="btn btn-primary mt-2">Ingresar</button>
@@ -51,6 +49,6 @@
 
             </div>
 
-        </div>  
+          </div>  
 
     </div>
