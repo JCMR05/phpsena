@@ -7,51 +7,61 @@
 
                     <?php if($_GET["modulo"] == "registro"):?>
                       <li class="nav-item">
-                        <a href="index.php?modulo=registro" class="nav-link active">Registro</a>
+                        <a href="registro" class="nav-link active">Registro</a>
                       </li>
                     <?php else: ?> 
                         <li class="nav-item">
-                         <a href="index.php?modulo=registro" class="nav-link">Registro</a>
+                         <a href="registro" class="nav-link">Registro</a>
                        </li>
                     <?php endif ?>
 
                     <?php if($_GET["modulo"] == "ingreso"):?>
                         <li class="nav-item">
-                         <a href="index.php?modulo=ingreso" class="nav-link active">Ingreso</a>
+                         <a href="ingreso" class="nav-link active">Ingreso</a>
                        </li>
                     <?php else: ?> 
                         <li class="nav-item">
-                         <a href="index.php?modulo=ingreso" class="nav-link">Ingreso</a>
+                         <a href="ingreso" class="nav-link">Ingreso</a>
                        </li>             
                     <?php endif ?>
 
                     <?php if($_GET["modulo"] == "contenido"):?>
                         <li class="nav-item">
-                        <a href="index.php?modulo=contenido" class="nav-link active">Inicio</a>
+                        <a href="contenido" class="nav-link active">Inicio</a>
                     </li>
                     <?php else: ?> 
                         <li class="nav-item">
-                        <a href="index.php?modulo=contenido" class="nav-link">Inicio</a>
+                        <a href="contenido" class="nav-link">Inicio</a>
                     </li>           
                     <?php endif ?>
                     
                     <?php if($_GET["modulo"] == "producto"):?>
                         <li class="nav-item">
-                        <a href="index.php?modulo=producto" class="nav-link active">Inventario</a>
+                        <a href="producto" class="nav-link active">Inventario</a>
                     </li>
                     <?php else: ?> 
                         <li class="nav-item">
-                        <a href="index.php?modulo=producto" class="nav-link">Inventario</a>
+                        <a href="producto" class="nav-link">Inventario</a>
+                    </li>         
+                    <?php endif ?>
+
+                    <?php if($_GET["modulo"] == "rol"):?>
+                        <li class="nav-item">
+                        <a href="rol" class="nav-link active">Roles</a>
+                    </li>
+                    <?php else: ?> 
+                        <li class="nav-item">
+                        <a href="rol" class="nav-link">Roles</a>
                     </li>         
                     <?php endif ?>
                     
                     <?php if($_GET["modulo"] == "salir"):?>
                         <li class="nav-item">
-                        <a href="#" class="nav-link active">Salir</a>
+                        <a href="salir" class="nav-link active">Salir</a>
                     </li>
                     <?php else: ?> 
                         <li class="nav-item">
-                        <a href="index.php?modulo=salir" class="nav-link">Salir</a>
+                        <a href="salir" class="nav-link">Salir</a>
                     </li>         
                     <?php endif ?>
 

@@ -14,11 +14,13 @@
 require_once "controladores/plantilla.controlador.php";
 require_once "controladores/registro.controlador.php";
 require_once "controladores/producto.controlador.php";
+require_once "controladores/rol.controlador.php";
 
 
 require_once "modelos/registro.modelo.php";
 require_once "modelos/producto.modelo.php";
 require_once "modelos/conexion.php";
+require_once "modelos/rol.modelo.php";
 
 $plantilla = new ControladorPlantilla();
 $plantilla -> ctrPlantilla();

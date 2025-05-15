@@ -1,5 +1,5 @@
 <?php
-    // Incluimos las clases necesarias del patrón MVC:
+    // Incluimos las clases necesarias del patrón VCM:
     // - Controlador para manejar la lógica de negocio
     require_once "controladores/registro.controlador.php";
     // - Modelo para interactuar con la base de datos
@@ -20,11 +20,11 @@
         if ($res === 'ok') {
             echo '<div class="alert alert-success">
                     Registro eliminado correctamente.
-                  </div>';
+                </div>';
         } else {
             echo '<div class="alert alert-danger">
                     Ocurrió un error al eliminar el registro.
-                  </div>';
+                </div>';
         }
     }
 

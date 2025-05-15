@@ -8,7 +8,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
 // 1) Verificamos que el usuario ha iniciado sesión correctamente
 if (!isset($_SESSION["validarIngreso"]) || $_SESSION["validarIngreso"] !== "ok") {
-    header("Location: index.php?modulo=ingreso"); // Redirige al login si no está autenticado
+    header("Location: ingreso"); // Redirige al login si no está autenticado
     exit; // Detiene la ejecución para no mostrar contenido restringido
 }
 
