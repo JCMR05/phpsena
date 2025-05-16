@@ -18,7 +18,9 @@ class ControladorRegistro{
                 "nombre" => $_POST["registroNombre"],
                 "telefono" => $_POST["registroTelefono"],
                 "correo" => $_POST["registroEmail"],
-                "clave" => password_hash($_POST["registroClave"], PASSWORD_DEFAULT)         
+                "clave" => password_hash($_POST["registroClave"], 
+                PASSWORD_DEFAULT),
+                "fk_id_rol" => $_POST["registroRolId"]      
             );
 
             $respuesta = ModeloRegistro::mdlRegistro($tabla, $datos);

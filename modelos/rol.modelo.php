@@ -27,11 +27,55 @@ class ModeloRol {
         }
     }
     
-        static public function mdlMostrarRoles($tabla) {
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        static public function mdlSeleccionarRol($tabla, $item, $valor){
+
+
+        if ($item === null && $valor === null) {
+
+                // Trae todos los registros, aliasando la PK a 'id'
+                $sql = "
+                SELECT 
+                    pk_id_rol AS id,
+                    rol_nombre,
+                    rol_descripcion,
+                    rol_estado,
+                    DATE_FORMAT(rol_created_at, '%d/%m/%Y') AS fecha 
+                FROM {$tabla} 
+                ORDER BY pk_id_rol DESC
+                ";
+
+                $stmt = Conexion::conectar()->prepare($sql);
+                $stmt->execute();
+                $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $stmt->closeCursor();
+
+                return $datos;
+
+
+        }else{
+
+            $sql = "
+                SELECT 
+                pk_id_rol AS id, 
+                rol_nombre, 
+                rol_descripcion, 
+                rol_estado,
+                DATE_FORMAT(pers_fecha_registro, '%d/%m/%Y') AS fecha 
+                FROM {$tabla} 
+                WHERE {$item} = :valor 
+                ORDER BY pk_id_persona DESC
+            ";
+
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindValue(":valor", $valor, PDO::PARAM_STR);
+            $stmt->execute();
+            $dato = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt->closeCursor();
+
+            return $dato;
+        }
     }
+
 
      // Método para editar un rol
      static public function mdlEditarRol($tabla, $datos) {

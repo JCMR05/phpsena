@@ -33,7 +33,7 @@
     if (!isset($_SESSION["validarIngreso"])
         || $_SESSION["validarIngreso"] !== "ok"
     ) {
-        header("Location: index.php?modulo=ingreso");
+        header("Location: ingreso");
         exit; // Detenemos la ejecución para evitar que se muestre contenido protegido
     }
 

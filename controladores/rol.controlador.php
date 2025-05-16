@@ -22,9 +22,9 @@ class ControladorRol {
         }
     }
 
-        static public function ctrMostrarRoles() {
+        static public function ctrSeleccionarRol($item = null, $valor = null) {
         $tabla = "rol";
-        $respuesta = ModeloRol::mdlMostrarRoles($tabla);
+        $respuesta = ModeloRol::mdlSeleccionarRol($tabla, $item, $valor);
         return $respuesta;
     }
 

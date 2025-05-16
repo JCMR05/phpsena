@@ -34,14 +34,14 @@
     if (!isset($_SESSION["validarIngreso"])
         || $_SESSION["validarIngreso"] !== "ok"
     ) {
-        header("Location: index.php?modulo=ingreso");
+        header("Location: ingreso");
         exit; // Detenemos la ejecución para evitar que se muestre contenido protegido
     }
 
     // 3) Obtener el listado actualizado de registros
     //    Después de procesar (o no) el borrado, pedimos al controlador
     //    que nos devuelva todos los registros de la tabla 'personas'
-    $registros = ControladorRol::ctrMostrarRoles();
+    $registros = ControladorRol::ctrSeleccionarRol();
 ?>
 
 <div class="container-fluid">
@@ -112,14 +112,13 @@
                                         <i class="fas fa-toggle-on"></i>
                                 </span>
                             </div>
-                            <select class="form-control" id="rol" name="rol">
+                            <select class="form-control" id="rol" name="registroRolId">
                                 <option value="">Selecciona un rol</option>
-                                <?php
-                                    $roles = ControladorRol::ctrMostrarRoles();
-                                    foreach ($roles as $rol) {
-                                        echo '<option value="'.$rol["pk_id_rol"].'">'.$rol["rol_nombre"].'</option>';
-                                    }
-                                ?>
+                                    <?php foreach ($roles as $rol): ?>
+                                    <option value="<?= htmlspecialchars($rol['pk_id_rol']) ?>">
+                                    <?= htmlspecialchars($rol['rol_nombre']) ?>
+                                    </option>
+                                    <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
