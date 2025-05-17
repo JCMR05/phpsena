@@ -1,6 +1,6 @@
 
 <?php
-    // Incluimos las clases necesarias del patrón VCM:
+    // Incluimos las clases necesarias del patrón MVC:
     // - Controlador para manejar la lógica de negocio
     require_once "controladores/registro.controlador.php";
     // - Modelo para interactuar con la base de datos
@@ -21,11 +21,11 @@
         if ($res === 'ok') {
             echo '<div class="alert alert-success">
                     Registro eliminado correctamente.
-                </div>';
+                  </div>';
         } else {
             echo '<div class="alert alert-danger">
                     Ocurrió un error al eliminar el registro.
-                </div>';
+                  </div>';
         }
     }
 
@@ -34,15 +34,18 @@
     if (!isset($_SESSION["validarIngreso"])
         || $_SESSION["validarIngreso"] !== "ok"
     ) {
-        header("Location: ingreso");
+        header("Location: index.php?modulo=ingreso");
         exit; // Detenemos la ejecución para evitar que se muestre contenido protegido
     }
 
     // 3) Obtener el listado actualizado de registros
     //    Después de procesar (o no) el borrado, pedimos al controlador
     //    que nos devuelva todos los registros de la tabla 'personas'
-    $registros = ControladorRol::ctrSeleccionarRol();
+    $roles = ControladorRol::ctrListarRoles();
+
 ?>
+
+
 
 <div class="container-fluid">
 		
@@ -63,7 +66,7 @@
                                 </span>
                             </div>
             
-                            <input type="text" class="form-control" id="nombre" name="registroNombre">
+                            <input type="text" class="form-control" id="nombrePersona" name="registroNombre" minlength="1" maxlength="15" pattern="[a-zA-Z]+" required placeholder="Ingresa tu nombre">
             
                         </div>
                         
@@ -80,7 +83,7 @@
                                 </span>
                             </div>
             
-                            <input type="text" class="form-control" id="telefono" name="registroTelefono">
+                            <input type="text" class="form-control" id="telefono" name="registroTelefono" minlength="10" maxlength="15" pattern="[0-9]{10,15}" required placeholder="Ingresa tu número de teléfono">
             
                         </div>
                         
@@ -98,30 +101,36 @@
                                 </span>
                             </div>
             
-                            <input type="email" class="form-control" id="email" name="registroEmail">
+                            <input type="email" class="form-control" id="email" name="registroEmail" minlength="5" maxlength="50" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required placeholder="Ingresa tu correo">
                         
                         </div>
                         
                     </div>
 
-                    <div class="form-group">
-                        <label for="rol">Seleccionar Rol:</label>
+                        <div class="form-group mb-3">
+                        <label for="rolSeleccionado">Rol:</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                        <i class="fas fa-toggle-on"></i>
-                                </span>
+                            <span class="input-group-text">
+                                <i class="fas fa-user-tag"></i>
+                            </span>
                             </div>
-                            <select class="form-control" id="rol" name="registroRolId">
-                                <option value="">Selecciona un rol</option>
-                                    <?php foreach ($roles as $rol): ?>
-                                    <option value="<?= htmlspecialchars($rol['pk_id_rol']) ?>">
-                                    <?= htmlspecialchars($rol['rol_nombre']) ?>
-                                    </option>
-                                    <?php endforeach; ?>
+                            <select 
+                            class="form-control" 
+                            id="rolSeleccionado" 
+                            name="registroRolId" 
+                            required
+                            >
+                            <option value="" disabled selected>Selecciona un rol</option>
+                            <?php foreach ($roles as $rol): ?>
+                                <option value="<?= htmlspecialchars($rol['pk_id_rol']) ?>">
+                                <?= htmlspecialchars($rol['rol_nombre']) ?>
+                                </option>
+                            <?php endforeach; ?>
                             </select>
                         </div>
-                    </div>
+                        </div>
+
             
                     <div class="form-group">
                         <label for="pwd">Contraseña:</label>
@@ -134,7 +143,7 @@
                                 </span>
                             </div>
             
-                            <input type="password" class="form-control" id="pwd" name="registroClave">
+                            <input type="password" class="form-control" id="pwd" name="registroClave" minlength="8" maxlength="20" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}" required placeholder="Ingresa tu contraseña">
             
                         </div>
             
@@ -162,7 +171,7 @@
                     ?>
 
                 
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button type="submit" class="btn btn-primary mt-2">Enviar</button>
             
                 </form>
             

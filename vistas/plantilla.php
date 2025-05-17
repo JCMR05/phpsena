@@ -15,8 +15,6 @@
 
 <body>
 
-<?php include "modulos/menu.php"; ?>
-
     <div class="container-fluid">
                 
             <div class="container py-5">
@@ -26,7 +24,7 @@
                 <?php
 
                     session_start();
-
+                  
                     $modulo = isset($_GET['modulo']) ? $_GET['modulo'] : 'ingreso';
 
                     if (!isset($_SESSION["validarIngreso"]) || $_SESSION["validarIngreso"] !== "ok") {
@@ -36,10 +34,11 @@
                             exit;
                         }
 
-                        header("Location: ingreso");
+                        header("Location: index.php?modulo=ingreso");
                         exit;
                     }
 
+                    include "modulos/menu.php"; 
 
                     if(isset($_GET["modulo"])){
 
@@ -69,6 +68,7 @@
             </div>
 
     </div>
+    <script src="vistas/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

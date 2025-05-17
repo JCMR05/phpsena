@@ -34,16 +34,18 @@
                         <a href="contenido" class="nav-link">Inicio</a>
                     </li>           
                     <?php endif ?>
+
                     
                     <?php if($_GET["modulo"] == "producto"):?>
                         <li class="nav-item">
-                        <a href="producto" class="nav-link active">Inventario</a>
+                        <a href="index.php?modulo=producto" class="nav-link active">Inventario</a>
                     </li>
                     <?php else: ?> 
                         <li class="nav-item">
                         <a href="producto" class="nav-link">Inventario</a>
                     </li>         
                     <?php endif ?>
+                    
 
                     <?php if($_GET["modulo"] == "rol"):?>
                         <li class="nav-item">
@@ -54,10 +56,12 @@
                         <a href="rol" class="nav-link">Roles</a>
                     </li>         
                     <?php endif ?>
+        
+
                     
                     <?php if($_GET["modulo"] == "salir"):?>
                         <li class="nav-item">
-                        <a href="salir" class="nav-link active">Salir</a>
+                        <a href="#" class="nav-link active">Salir</a>
                     </li>
                     <?php else: ?> 
                         <li class="nav-item">

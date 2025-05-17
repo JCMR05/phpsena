@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL);
 
 #EL INDEX: En él mostraremos la salida de las vistas al usuario y también a traves de él enviaremos las 
 #distintas acciones que el usuario envíe al controlador.
@@ -16,11 +17,10 @@ require_once "controladores/registro.controlador.php";
 require_once "controladores/producto.controlador.php";
 require_once "controladores/rol.controlador.php";
 
-
 require_once "modelos/registro.modelo.php";
 require_once "modelos/producto.modelo.php";
-require_once "modelos/conexion.php";
 require_once "modelos/rol.modelo.php";
+require_once "modelos/conexion.php";
 
 $plantilla = new ControladorPlantilla();
 $plantilla -> ctrPlantilla();

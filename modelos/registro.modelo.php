@@ -19,7 +19,7 @@ class ModeloRegistro {
         $stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
         $stmt->bindParam(":correo",   $datos["correo"],   PDO::PARAM_STR);
         $stmt->bindParam(":clave",    $datos["clave"],    PDO::PARAM_STR);
-        $stmt->bindParam(":fk_id_rol",    $datos["fk_id_rol"],    PDO::PARAM_STR);
+        $stmt->bindParam(":fk_id_rol",$datos["fk_id_rol"],PDO::PARAM_STR);
 
         $ok = $stmt->execute();
         $stmt->closeCursor();

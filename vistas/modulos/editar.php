@@ -125,7 +125,7 @@ if ($actualizar === 'ok') {
                 </div>
 
                 <!-- Botón de envío -->
-                <button type="submit" class="btn btn-primary mt-2">Actualizar</button>
+                <button type="submit" class="btn btn-primary">Actualizar</button>
 
             </form>
         </div>

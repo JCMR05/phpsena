@@ -3,73 +3,87 @@
     <div class="container py-5">
         <div class="d-flex justify-content-center text-center py-3">
             <form class="p-5 bg-light" method="post">
-
-                <!-- Campo: Nombre del rol -->
-                <div class="form-group">
-                    <label for="rol_nombre">Nombre del rol:</label>
+                
+                <!-- Nombre del Rol -->
+                <div class="form-group mb-3">
+                    <label for="rolNombre">Nombre del Rol:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
                                 <i class="fas fa-user-tag"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control" id="rol_nombre" name="rol_nombre" required>
+                        <input 
+                          type="text" 
+                          class="form-control" 
+                          id="rolNombre" 
+                          name="registroRolNombre" 
+                          placeholder="Escribe el nombre del rol"
+                          required
+                        >
                     </div>
                 </div>
-
-                <!-- Campo: Descripción del rol -->
-                <div class="form-group">
-                    <label for="rol_descripcion">Descripción:</label>
+                
+                <!-- Descripción del Rol -->
+                <div class="form-group mb-3">
+                    <label for="rolDescripcion">Descripción:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
                                 <i class="fas fa-align-left"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control" id="rol_descripcion" name="rol_descripcion" required>
+                        <textarea 
+                          class="form-control" 
+                          id="rolDescripcion" 
+                          name="registroRolDescripcion" 
+                          rows="3" 
+                          placeholder="Descripción breve del rol"
+                          required
+                        ></textarea>
                     </div>
                 </div>
-
-                <!-- Campo: Estado del rol -->
-                <div class="form-group">
-                    <label for="rol_estado">Estado:</label>
+                
+                <!-- Estado del Rol -->
+                <div class="form-group mb-4">
+                    <label for="rolEstado">Estado:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
-                                    <i class="fas fa-toggle-on"></i>
+                                <i class="fas fa-toggle-on"></i>
                             </span>
                         </div>
-                        <select class="form-control" id="rol_estado" name="rol_estado">
+                        <select 
+                          class="form-control" 
+                          id="rolEstado" 
+                          name="registroRolEstado"
+                          required
+                        >
+                            <option value="" disabled selected>Selecciona un estado</option>
                             <option value="1">Activo</option>
                             <option value="0">Inactivo</option>
                         </select>
                     </div>
                 </div>
                 
-                <div class= "mt-2">
-                    <?php
-
-                                /*=============================================
-                                FORMA EN QUE SE INSTA­NCIA LA CLASE DE UN MÉTODO ESTÁTICO
-                                =============================================*/
-
-                                $rol = ControladorRol::ctrRegistrarRol();
-
-                                if ($rol === 'ok') {
-                                    // Aquí sí entra cuando el método devuelve "ok"
-                                    echo '<script>
-                                        if (window.history.replaceState) {
-                                            window.history.replaceState(null, null, window.location.href);
-                                        }
-                                    </script>';
-                                    echo '<div class="alert alert-success">El rol ha sido registrado</div>';
+                <?php
+                    /*=============================================
+                    INSTANCIAMOS EL MÉTODO DEL CONTROLADOR
+                    =============================================*/
+                    $crearRol = ControladorRol::ctrCrearRol();
+                    if ($crearRol === 'ok') {
+                        echo '<script>
+                                if (window.history.replaceState) {
+                                  window.history.replaceState(null, null, window.location.href);
                                 }
-
-                    ?>
-                </div>
-
-                <button type="submit" class="btn btn-primary mt-2">Registrar rol</button>
-
+                              </script>';
+                        echo '<div class="alert alert-success">El rol ha sido registrado con éxito</div>';
+                    } elseif ($crearRol === 'error') {
+                        echo '<div class="alert alert-danger">Hubo un error al registrar el rol</div>';
+                    }
+                ?>
+                
+                <button type="submit" class="btn btn-primary">Guardar Rol</button>
             </form>
         </div>
     </div>

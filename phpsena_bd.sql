@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3308
--- Tiempo de generación: 13-05-2025 a las 17:39:58
+-- Tiempo de generación: 16-05-2025 a las 20:19:33
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -42,8 +42,9 @@ CREATE TABLE `personas` (
 --
 
 INSERT INTO `personas` (`pk_id_persona`, `pers_nombre`, `pers_telefono`, `pers_correo`, `pers_clave`, `pers_fecha_registro`, `fk_id_rol`) VALUES
-(8, 'Germain', '3123456789', 'germainbarrera@gmail.com', '$2y$10$Yh9sbSvkob3KcsYBxXuIo./RR8JxxtOi14enZQll69j2Y8o2XtW0y', '2025-05-13 00:08:57', 3),
-(9, 'Carlos', '3106067414', 'cabarrientos@sena.edu.co', '$2y$10$UmQzFTvgHz9Ka4HsPkJk.e/tuxgDDTKqCTovBoYOJUn2D2RnWHZ6a', '2025-05-13 00:38:50', 3);
+(8, 'Germain', '3123456789', 'germain@gmail.com', '$2y$10$Yh9sbSvkob3KcsYBxXuIo./RR8JxxtOi14enZQll69j2Y8o2XtW0y', '2025-05-13 00:08:57', 3),
+(11, 'Julian', '326655666', 'julian@gmail.com', '$2y$10$mh6q6DBOQKh6bycWCClX7O9o7T9DRfW5tdxgkJwUG8jxECyL7M80e', '2025-05-15 19:17:28', 3),
+(12, 'Danilo', '13422423424', 'danilo@gmail.com', '$2y$10$uuBAlPOVv1WgX2DVeJIEdODeg.oV3x8vwr5DLFYvWIBUmKMQydcjS', '2025-05-15 19:30:42', 2);
 
 -- --------------------------------------------------------
 
@@ -69,26 +70,27 @@ INSERT INTO `productos` (`pk_id_iproducto`, `prod_nombre`, `prod_cantidad`, `pro
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `rol`
+-- Estructura de tabla para la tabla `roles`
 --
 
-CREATE TABLE `rol` (
-  `id_rol` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL COMMENT 'Ej: administrador, editor, invitado',
-  `descripcion` varchar(255) DEFAULT NULL COMMENT 'Breve descripción del rol',
-  `estado` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1=activo, 0=inactivo',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+CREATE TABLE `roles` (
+  `pk_id_rol` int(11) NOT NULL,
+  `rol_nombre` varchar(50) NOT NULL COMMENT 'Ej: administrador, editor, invitado',
+  `rol_descripcion` varchar(255) DEFAULT NULL COMMENT 'Breve descripción del rol',
+  `rol_estado` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1=activo, 0=inactivo',
+  `rol_created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `rol_updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `rol`
+-- Volcado de datos para la tabla `roles`
 --
 
-INSERT INTO `rol` (`id_rol`, `nombre`, `descripcion`, `estado`, `created_at`, `updated_at`) VALUES
+INSERT INTO `roles` (`pk_id_rol`, `rol_nombre`, `rol_descripcion`, `rol_estado`, `rol_created_at`, `rol_updated_at`) VALUES
 (1, 'administrador', 'Acceso total', 1, '2025-05-13 07:00:50', '2025-05-13 07:00:50'),
 (2, 'editor', 'Puede crear y editar', 1, '2025-05-13 07:00:50', '2025-05-13 07:00:50'),
-(3, 'invitado', 'Solo lectura', 1, '2025-05-13 07:00:50', '2025-05-13 07:00:50');
+(3, 'invitado', 'Solo lectura', 1, '2025-05-13 07:00:50', '2025-05-13 07:00:50'),
+(6, 'Vendedor', 'Permisos superusuario', 1, '2025-05-15 02:09:41', '2025-05-15 02:09:41');
 
 --
 -- Índices para tablas volcadas
@@ -108,11 +110,11 @@ ALTER TABLE `productos`
   ADD PRIMARY KEY (`pk_id_iproducto`);
 
 --
--- Indices de la tabla `rol`
+-- Indices de la tabla `roles`
 --
-ALTER TABLE `rol`
-  ADD PRIMARY KEY (`id_rol`),
-  ADD UNIQUE KEY `nombre` (`nombre`);
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`pk_id_rol`),
+  ADD UNIQUE KEY `nombre` (`rol_nombre`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -122,7 +124,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `personas`
 --
 ALTER TABLE `personas`
-  MODIFY `pk_id_persona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `pk_id_persona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -131,10 +133,10 @@ ALTER TABLE `productos`
   MODIFY `pk_id_iproducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `rol`
+-- AUTO_INCREMENT de la tabla `roles`
 --
-ALTER TABLE `rol`
-  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `roles`
+  MODIFY `pk_id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
@@ -144,7 +146,7 @@ ALTER TABLE `rol`
 -- Filtros para la tabla `personas`
 --
 ALTER TABLE `personas`
-  ADD CONSTRAINT `fk_personas_rol` FOREIGN KEY (`fk_id_rol`) REFERENCES `rol` (`id_rol`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_personas_rol` FOREIGN KEY (`fk_id_rol`) REFERENCES `roles` (`pk_id_rol`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

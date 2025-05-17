@@ -4,7 +4,7 @@ include "modelos/registro.modelo.php";
 
 class ControladorRegistro{
 
-    /*=============================================
+   /*=============================================
     Agregar Registros
     =============================================*/  
     
@@ -18,9 +18,8 @@ class ControladorRegistro{
                 "nombre" => $_POST["registroNombre"],
                 "telefono" => $_POST["registroTelefono"],
                 "correo" => $_POST["registroEmail"],
-                "clave" => password_hash($_POST["registroClave"], 
-                PASSWORD_DEFAULT),
-                "fk_id_rol" => $_POST["registroRolId"]      
+                "fk_id_rol" => $_POST["registroRolId"],
+                "clave" => password_hash($_POST["registroClave"], PASSWORD_DEFAULT)           
             );
 
             $respuesta = ModeloRegistro::mdlRegistro($tabla, $datos);
@@ -32,7 +31,7 @@ class ControladorRegistro{
     }
 
 
-    /*=============================================
+   /*=============================================
     Seleccionar Registros
     =============================================*/
 

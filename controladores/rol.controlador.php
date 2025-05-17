@@ -4,40 +4,62 @@ include "modelos/rol.modelo.php";
 
 class ControladorRol {
 
-    static public function ctrRegistrarRol() {
+    /**
+     * Método para crear un nuevo rol.
+     * Retorna "ok" si la inserción fue exitosa, "error" en caso contrario.
+     */
+    static public function ctrCrearRol() {
 
-        if (isset($_POST["rol_nombre"]) && isset($_POST["rol_descripcion"]) && isset($_POST["rol_estado"])) {
+        // Verificamos que el formulario fue enviado
+        if (isset($_POST["registroRolNombre"]) && isset($_POST["registroRolEstado"])) {
 
-            $tabla = "rol";
+            // Sanitizamos/trim de los campos
+            $nombre      = trim($_POST["registroRolNombre"]);
+            $descripcion = trim($_POST["registroRolDescripcion"]);
+            $estado      = intval($_POST["registroRolEstado"]);
 
-            $datos = array(
-                "rol_nombre" => $_POST["rol_nombre"],
-                "rol_descripcion" => $_POST["rol_descripcion"],
-                "rol_estado" => $_POST["rol_estado"]
-            );
+            // Validación básica
+            if ($nombre === "" || !in_array($estado, [0,1], true)) {
+                return "error";
+            }
 
-            $respuesta = ModeloRol::mdlRegistrarRol($tabla, $datos);
+            // Preparamos datos para el modelo
+            $datos = [
+                "rol_nombre"      => $nombre,
+                "rol_descripcion" => $descripcion,
+                "rol_estado"      => $estado
+            ];
+   
+            // Llamada al modelo
+            $respuesta = ModeloRol::mdlIngresarRol("roles", $datos);
 
-            return $respuesta;
+            return ($respuesta === "ok") ? "ok" : "error";
         }
     }
 
-        static public function ctrSeleccionarRol($item = null, $valor = null) {
-        $tabla = "rol";
-        $respuesta = ModeloRol::mdlSeleccionarRol($tabla, $item, $valor);
+    /**
+     * Puedes agregar aquí otros métodos como:
+     * - ctrListarRoles()
+     * - ctrEditarRol()
+     * - ctrEliminarRol()
+     * según vayan surgiendo tus necesidades.
+     */
+
+
+    // … aquí ya tienes ctrCrearRol() …
+
+    /**
+     * Recupera todos los roles de la tabla.
+     *
+     * @return array|false  Array de roles (cada elemento es un array asociativo)
+     *                      o false si falla la consulta.
+     */
+    static public function ctrListarRoles() {
+        $tabla = "roles";
+        $respuesta = ModeloRol::mdlListarRoles($tabla);
         return $respuesta;
     }
 
-     // Método para editar un rol existente
-        static public function ctrEditarRol($datos) {
-        $tabla = "rol";
-        return ModeloRol::mdlEditarRol($tabla, $datos);
-    }
-
-    // Método para eliminar un rol
-        static public function ctrEliminarRol($rol_id) {
-        $tabla = "rol";
-        return ModeloRol::mdlEliminarRol($tabla, $rol_id);
-    }
+    // … otros métodos …
 
 }
